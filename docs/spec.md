@@ -70,7 +70,7 @@ All features must be testable via DXF export.
 
 ### Requirements
 - Valid DXF format
-- Compatible with AutoCAD
+- Compatible with FreeCAD
 
 ---
 
@@ -84,7 +84,7 @@ All features must be testable via DXF export.
 ### First Test
 - Create one line
 - Export to DXF
-- Open in AutoCAD
+- Open in FreeCAD
 
 ---
 
@@ -93,4 +93,4 @@ All features must be testable via DXF export.
 - Create Line
 - Store in Scene
 - Export DXF
-- Open successfully in AutoCAD
+- Open successfully in FreeCAD
