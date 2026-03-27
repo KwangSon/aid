@@ -1,96 +1,36 @@
-# AID (AI-Integrated Design) – Core 2D CAD Spec
+# AID v1 – Minimal 2D CAD + Viewer Spec
 
 ## Goal
-Build a minimal 2D CAD engine in Rust.
-All features must be testable via DXF export.
+Build a minimal 2D CAD engine with a basic viewport.
+User can draw, select, and export entities.
 
 ---
 
-## Core Principles
-- Command-driven architecture
-- Pure geometry (no side effects)
-- Simple data structures
-- DXF as validation output
+## Scope (v1)
+
+### Must Have
+- Line entity
+- Scene storage
+- Command system
+- DXF export
+- Viewport (render lines)
+- Mouse input
+- Selection (hit test)
+
+### Not Included
+- 3D
+- BIM
+- Advanced UI (panels, menus)
+- Constraints
+- Parametric modeling
 
 ---
 
-## 1. Geometry
+## Architecture
 
-### Types
-- Point2 (x, y)
-- Line (start, end)
-- Circle (center, radius)
-
-### Requirements
-- Immutable
-- Pure functions only
-
----
-
-## 2. Entity System
-
-### Entity
-- Line
-- Circle
-
-### EntityId
-- Unique identifier
-
----
-
-## 3. Scene
-
-### Structure
-- Store all entities
-
-### Requirements
-- No logic
-- Simple container
-
----
-
-## 4. Command System
-
-### Commands
-- CreateLine
-- CreateCircle
-- MoveEntity
-- DeleteEntity
-
-### Requirements
-- All changes via commands
-- Deterministic execution
-
----
-
-## 5. DXF Export
-
-### Goal
-- Export Scene → DXF file
-
-### Requirements
-- Valid DXF format
-- Compatible with FreeCAD
-
----
-
-## 6. Testing
-
-### Strategy
-- Execute command
-- Export DXF
-- Verify output
-
-### First Test
-- Create one line
-- Export to DXF
-- Open in FreeCAD
-
----
-
-## Done Criteria (v0)
-
-- Create Line
-- Store in Scene
-- Export DXF
-- Open successfully in FreeCAD
+```text
+Core (geometry + command)
+   ↓
+Viewer (wgpu render)
+   ↓
+Window/Input (winit)

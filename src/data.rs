@@ -90,6 +90,20 @@ impl Main {
         self.entities.insert(entity.id.id, entity);
     }
 
+    pub fn remove_entity(&mut self, id: u64) {
+        self.entities.remove(&id);
+        // Also remove from all scenes
+        for scene in self.scenes.values_mut() {
+            scene.entity_ids.retain(|&eid| eid != id);
+        }
+    }
+
+    pub fn update_entity_data(&mut self, id: u64, data: EntityData) {
+        if let Some(entity) = self.entities.get_mut(&id) {
+            entity.data = data;
+        }
+    }
+
     pub fn add_scene(&mut self, scene: Scene) {
         self.scenes.insert(scene.id.id, scene);
     }
@@ -100,5 +114,11 @@ impl Main {
 
     pub fn get_scene_mut(&mut self, id: u64) -> Option<&mut Scene> {
         self.scenes.get_mut(&id)
+    }
+}
+
+impl Default for Main {
+    fn default() -> Self {
+        Self::new()
     }
 }
